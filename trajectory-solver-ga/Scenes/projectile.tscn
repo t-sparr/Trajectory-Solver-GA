@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://jpvda225cr5i"]
+
+[ext_resource type="Script" uid="uid://b3tbeg0qu3ax8" path="res://projectile.gd" id="1_yr2qt"]
+[ext_resource type="PackedScene" uid="uid://oi046mrhtiei" path="res://Scenes/gpu_particles_2d.tscn" id="2_d4467"]
+[ext_resource type="Texture2D" uid="uid://b348khujxwe36" path="res://Assets/kenney_tanks/PNG/Default size/tank_bullet5.png" id="2_tl4hk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4467"]
+radius = 7.0
+
+[node name="Projectile" type="Area2D"]
+scale = Vector2(0.76, 0.76)
+script = ExtResource("1_yr2qt")
+deathParticle = ExtResource("2_d4467")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_d4467")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_tl4hk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

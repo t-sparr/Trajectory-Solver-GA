@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://oi046mrhtiei"]
+
+[ext_resource type="Script" uid="uid://dd0f5ghbb4uqg" path="res://Scenes/gpu_particles_2d.gd" id="1_7muxf"]
+
+[sub_resource type="Gradient" id="Gradient_y5ckk"]
+colors = PackedColorArray(0.972549, 0, 0, 1, 0.92549, 0.447059, 0.00784314, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7muxf"]
+gradient = SubResource("Gradient_y5ckk")
+
+[sub_resource type="Curve" id="Curve_yddnh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g8wx3"]
+curve = SubResource("Curve_yddnh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0m2jd"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 243.39
+angular_velocity_min = -191.49
+angular_velocity_max = -22.86
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_max = 15.25
+scale_curve = SubResource("CurveTexture_g8wx3")
+color_initial_ramp = SubResource("GradientTexture1D_7muxf")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = -100
+rotation = -0.000907672
+emitting = false
+amount = 50
+lifetime = 0.54
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_0m2jd")
+script = ExtResource("1_7muxf")

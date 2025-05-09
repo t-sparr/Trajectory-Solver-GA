@@ -1,0 +1,199 @@
+[gd_scene load_steps=17 format=4 uid="uid://0lrurmjibroa"]
+
+[ext_resource type="Texture2D" uid="uid://bqs65yxbgwaq" path="res://Assets/kenney_tanks/PNG/Default size/tanks_tankTracks1.png" id="1_1l0tm"]
+[ext_resource type="TileSet" uid="uid://dl6ufxyh8ddp3" path="res://Assets/kenney_pixel-platformer-blocks/Tilemap/rock_packed.tres" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://dfvefyo3bimny" path="res://Scenes/game.gd" id="1_h4fw4"]
+[ext_resource type="Script" uid="uid://s71w3wtmirt3" path="res://Scenes/player_tank.gd" id="1_v158k"]
+[ext_resource type="Script" uid="uid://bwpj6d6wluwdn" path="res://Scenes/tcp_client.gd" id="2_rfjv2"]
+[ext_resource type="Texture2D" uid="uid://040wueivmqsl" path="res://Assets/kenney_tanks/PNG/Default size/tanks_tankNavy_body1.png" id="2_v158k"]
+[ext_resource type="Texture2D" uid="uid://bjnonulbhkp3k" path="res://Assets/assets/SVG/environment/background_bushes.svg" id="2_wrm1d"]
+[ext_resource type="Texture2D" uid="uid://cfp7v6r6lws4x" path="res://Assets/assets/SVG/environment/background_grass.svg" id="3_3dryh"]
+[ext_resource type="Texture2D" uid="uid://d36o3ccvr5qct" path="res://Assets/kenney_tanks/PNG/Default size/tanks_turret1.png" id="3_h4fw4"]
+[ext_resource type="PackedScene" uid="uid://jpvda225cr5i" path="res://Scenes/projectile.tscn" id="3_o5yvi"]
+[ext_resource type="Texture2D" uid="uid://dw3fs208twgfs" path="res://Assets/assets/PNG@2x/thorn.big.png" id="4_3dryh"]
+[ext_resource type="FontFile" uid="uid://dyxwahap01dd0" path="res://Assets/RobotoMono-VariableFont_wght.ttf" id="10_ldgsr"]
+[ext_resource type="Texture2D" uid="uid://c42hkp1bgtcde" path="res://Assets/kenney_tanks/PNG/Default size/tanks_tankGrey3.png" id="12_rku1e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rku1e"]
+size = Vector2(9686.11, 178.889)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
+font = ExtResource("10_ldgsr")
+font_size = 41
+font_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.215686)
+shadow_offset = Vector2(2.86, 2.665)
+
+[sub_resource type="Environment" id="Environment_o5yvi"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 4.18
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_h4fw4")
+
+[node name="TCP_Client" type="Node2D" parent="."]
+script = ExtResource("2_rfjv2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 100
+offset_left = -724.0
+offset_top = -399.0
+offset_right = -524.0
+offset_bottom = -199.0
+scale = Vector2(7.25072, 4.28774)
+color = Color(0, 0, 0, 0.121569)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.88, 0.88)
+
+[node name="PlayerTank" type="Node2D" parent="."]
+position = Vector2(-568, 153)
+rotation = 0.00140509
+scale = Vector2(0.885, 0.885)
+script = ExtResource("1_v158k")
+projectile_scene = ExtResource("3_o5yvi")
+power_multiplier = 7.0
+
+[node name="TanksTankTracks1" type="Sprite2D" parent="PlayerTank"]
+position = Vector2(0, 13.5593)
+texture = ExtResource("1_1l0tm")
+
+[node name="TanksTankNavyBody1" type="Sprite2D" parent="PlayerTank"]
+z_index = 2
+texture = ExtResource("2_v158k")
+
+[node name="TanksTurret1" type="Sprite2D" parent="PlayerTank"]
+z_index = 1
+position = Vector2(-1.19209e-06, -18.0791)
+texture = ExtResource("3_h4fw4")
+offset = Vector2(15.21, 0)
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(-98, -35.465)
+scale = Vector2(0.72, 0.72)
+
+[node name="Tilemap1" type="TileMapLayer" parent="Background"]
+z_index = 3
+texture_filter = 1
+position = Vector2(0, 31.9375)
+scale = Vector2(0.25, 0.25)
+tile_map_data = PackedByteArray("AADu/wgABAACAAEAAADv/wgABAABAAEAAADw/wgABAABAAEAAADx/wgABAABAAEAAADy/wgABAABAAEAAADz/wgABAABAAEAAAD0/wgABAACAAEAAAD1/wgABAACAAEAAAD2/wgABAAEAAEAAFD3/wgABAACAAAAAAD4/wgABAACAAAAAAD5/wgABAACAAAAAAD6/wgABAACAAAAAAD7/wgABAABAAIAAAD8/wgABAABAAIAAAD9/wgABAABAAIAAAD+/wgABAACAAIAAAD//wgABAABAAIAAAAAAAgABAAAAAIAAAABAAgABAAAAAIAAAACAAgABAABAAIAAAADAAgABAAAAAIAAAAEAAgABAAAAAIAAAAKAAgABAAEAAEAAFALAAgABAACAAAAAAAPAAgABAAEAAEAAAD6/wkABAABAAEAAAD7/wkABAACAAEAAAD7/wcABAABAAIAAAD8/wcABAABAAIAAAD8/wYABAABAAIAAAD8/wUABAABAAIAAAD8/wQABAADAAIAAAD9/wQABAABAAIAAAD9/wMABAABAAIAAAD+/wIABAABAAIAAAD//wIABAABAAIAAAAAAAIABAABAAIAAAAAAAEABAABAAIAAAABAAEABAABAAIAAAACAAEABAABAAIAAAADAAEABAABAAIAAAADAAIABAABAAIAAAAEAAMABAACAAIAAAAFAAMABAABAAIAAAAFAAQABAABAAIAAAAFAAUABAABAAIAAAAFAAYABAACAAIAAAAFAAcABAACAAIAAAD9/wYABAABAAIAAAD9/wUABAABAAIAAAD9/wcABAABAAIAAAD+/wcABAACAAIAAAD//wcABAABAAIAAAD//wYABAABAAIAAAD//wUABAACAAIAAAD+/wUABAACAAIAAAD+/wYABAABAAIAAAAAAAYABAACAAIAAAAAAAUABAACAAIAAAAAAAQABAAAAAIAAAD//wQABAAAAAIAAAD+/wQABAABAAIAAAABAAUABAAAAAIAAAABAAQABAABAAIAAAABAAMABAACAAIAAAAAAAMABAAAAAIAAAD//wMABAACAAIAAAD+/wMABAABAAIAAAABAAIABAABAAIAAAACAAIABAACAAIAAAACAAMABAACAAIAAAACAAQABAACAAIAAAADAAQABAABAAIAAAADAAUABAACAAIAAAAEAAUABAABAAIAAAAEAAQABAACAAIAAAADAAMABAACAAIAAAADAAYABAACAAIAAAADAAcABAACAAIAAAACAAcABAAAAAIAAAABAAcABAAAAAIAAAAAAAcABAACAAIAAAAEAAcABAAAAAIAAAAEAAYABAACAAIAAAACAAYABAAAAAIAAAACAAUABAAAAAIAAAABAAYABAAAAAIAAAD//wEABAADAAIAAAD9/wIABAADAAIAAAD7/wYABAADAAIAAAD9/wkABAACAAIAAAD8/wkABAACAAIAAAD7/woABAACAAIAAAD7/wsABAACAAEAAAD8/wsABAACAAIAAAD9/wsABAAAAAIAAAD+/wsABAAAAAIAAAD+/woABAACAAIAAAD+/wkABAACAAIAAAD9/woABAACAAIAAAD8/woABAACAAIAAAD//woABAAAAAIAAAAAAAoABAAAAAIAAAAAAAkABAACAAIAAAD//wkABAAAAAIAAAD//wsABAAAAAIAAAAAAAsABAACAAIAAAABAAsABAACAAIAAAACAAsABAACAAIAAAACAAoABAACAAIAAAADAAoABAACAAIAAAADAAkABAACAAIAAAACAAkABAAAAAIAAAABAAkABAAAAAIAAAADAAsABAACAAIAAAAEAAoABAACAAIAAAAEAAkABAACAAIAAAABAAoABAAAAAIAAAAEAAsABAACAAIAAAD7/wwABAACAAEAAAD8/wwABAACAAEAAAD9/wwABAACAAIAAAD+/wwABAACAAIAAAD//wwABAACAAIAAAAAAAwABAACAAIAAAABAAwABAACAAIAAAACAAwABAACAAIAAAADAAwABAACAAEAAAAEAAwABAACAAEAAAD2/wcABAAEAAAAAFD1/wYABAAEAAAAAFD1/wcABAAEAAEAAFD0/wYABAACAAAAAADz/wYABAACAAAAAADy/wYABAACAAAAAADx/wYABAACAAAAAADw/wYABAACAAAAAADv/wYABAACAAAAAADu/wYABAAEAAAAAAD0/wcABAACAAEAAADz/wcABAABAAEAAADy/wcABAACAAEAAADx/wcABAACAAEAAADw/wcABAABAAEAAADv/wcABAACAAEAAADu/wcABAAEAAEAAADs/wkABAACAAEAAADt/wkABAABAAEAAADu/wkABAABAAEAAADr/wkABAABAAEAAADs/woABAACAAEAAADt/woABAABAAEAAADu/woABAABAAEAAADv/woABAAAAAEAAADv/wkABAABAAEAAADw/wkABAAAAAEAAADw/woABAAAAAEAAADx/wkABAABAAEAAADx/woABAAAAAEAAADy/woABAABAAEAAADz/woABAAAAAEAAADz/wkABAAAAAEAAADy/wkABAAAAAEAAADx/wsABAAAAAEAAADy/wsABAAAAAEAAADz/wsABAAAAAEAAADz/wwABAAAAAEAAADy/wwABAAAAAEAAADx/wwABAACAAEAAADw/wwABAACAAEAAADw/wsABAABAAEAAADv/wsABAABAAEAAADu/wsABAABAAEAAADt/wsABAABAAEAAADs/wsABAABAAEAAADr/wsABAABAAEAAADr/woABAACAAEAAADq/woABAABAAEAAADq/wkABAABAAEAAADq/wsABAACAAEAAADq/wwABAACAAEAAADr/wwABAACAAEAAADs/wwABAACAAEAAADt/wwABAACAAEAAADu/wwABAACAAEAAADv/wwABAACAAEAAAD0/wsABAABAAEAAAD0/woABAABAAEAAAD0/wkABAABAAEAAAD1/wkABAABAAEAAAD2/wkABAABAAEAAAD3/wkABAACAAEAAAD4/wkABAACAAEAAAD5/wkABAACAAEAAAD5/woABAAAAAEAAAD4/woABAABAAEAAAD3/woABAAAAAEAAAD3/wsABAAAAAEAAAD2/wsABAABAAEAAAD1/wsABAABAAEAAAD1/wwABAACAAEAAAD0/wwABAACAAEAAAD2/wwABAACAAEAAAD3/wwABAAAAAEAAAD4/wwABAABAAEAAAD4/wsABAAAAAEAAAD2/woABAAAAAEAAAD1/woABAACAAEAAAD5/wsABAABAAEAAAD6/wsABAACAAEAAAD6/woABAACAAEAAAD6/wwABAACAAEAAAD5/wwABAACAAEAAADt/wcABAACAAAAAADs/wcABAACAAAAAADr/wcABAACAAAAAADt/wgABAABAAEAAADs/wgABAABAAEAAADr/wgABAABAAEAAADq/wgABAABAAEAAADq/wcABAACAAAAAAAIAAkABAACAAEAAAAIAAoABAAAAAEAAAAJAAoABAACAAEAAFAJAAsABAAAAAEAAAAKAAsABAACAAEAAAAKAAwABAABAAEAAAALAAwABAABAAEAAAALAAsABAACAAEAAAALAAoABAACAAEAAAAKAAoABAABAAEAAAALAAkABAABAAEAAAAKAAkABAABAAEAAAAJAAkABAAAAAEAAAAIAAsABAACAAEAAAAIAAwABAABAAEAAAAJAAwABAACAAEAAFAPAAsABAABAAEAAAAPAAoABAABAAEAAAAPAAkABAABAAEAAAAQAAoABAACAAEAAAAPAAwABAABAAEAAAAQAAwABAACAAEAAAARAAwABAAAAAEAAAARAAsABAABAAEAAAASAAsABAACAAEAADASAAoABAACAAEAAAARAAkABAACAAEAAAAQAAkABAABAAEAAAATAAsABAACAAEAAFATAAoABAAAAAEAAAATAAkABAAAAAEAAAASAAkABAACAAEAAGAQAAsABAABAAEAAAASAAwABAACAAEAAAAUAAsABAACAAEAAAAVAAsABAACAAEAADAWAAoABAACAAEAAAAXAAoABAABAAEAAAAXAAkABAAAAAEAAAAWAAkABAAAAAEAAAAVAAkABAACAAEAAAAUAAkABAACAAEAAFAWAAsABAACAAEAAFAXAAsABAACAAEAAAAYAAoABAACAAEAAAAYAAkABAABAAEAAAAUAAoABAACAAEAAGARAAoABAAAAAEAAAATAAwABAAAAAEAAAAUAAwABAABAAEAAAAVAAwABAAAAAEAAAAVAAoABAAAAAEAAAAYAAsABAABAAEAAAAMAAgABAACAAQAAAANAAgABAACAAQAAAAOAAgABAACAAQAAAAWAAwABAABAAEAAAAXAAwABAABAAEAAAAYAAwABAABAAEAAAAGAAUABAACAAIAAAAGAAYABAACAAIAAAAGAAcABAACAAIAAAAGAAgABAACAAIAAAAGAAkABAACAAEAAAAGAAoABAACAAIAAAAGAAsABAACAAIAAAAFAAsABAACAAEAAAAFAAoABAACAAIAAAAFAAkABAACAAIAAAAFAAgABAACAAIAAAAFAAwABAACAAEAAAAGAAwABAACAAEAAAAHAAYABAACAAIAAAAHAAcABAACAAIAAAAHAAgABAACAAEAAAAJAAcABAACAAAAAAAIAAcABAACAAAAAAAKAAcABAAEAAAAAFAHAAkABAACAAEAAAAHAAoABAACAAEAAAAHAAsABAACAAEAAAAHAAwABAACAAEAAAAIAAgABAACAAEAAAAJAAgABAACAAEAAAABAAAABAADAAIAAAADAAAABAADAAIAAFACAAAABAACAAIAAAAPAAcABAAEAAAAAAAQAAYABAAEAAAAAAARAAYABAACAAAAAAASAAYABAACAAAAAAATAAYABAACAAAAAAAUAAUABAAEAAAAAAAVAAUABAACAAAAAAAWAAUABAACAAAAAAAXAAUABAACAAAAAAAUAAYABAAEAAEAAAAQAAcABAAEAAEAAAARAAgABAABAAEAAAASAAgABAAAAAEAAAATAAgABAACAAEAADAUAAgABAACAAEAAFAVAAgABAAAAAEAAAAWAAgABAAAAAEAAAAXAAgABAABAAEAAAAYAAgABAABAAEAAAAYAAcABAABAAEAAAAXAAcABAAAAAEAAAAWAAcABAABAAEAAAAVAAcABAAAAAEAAAAUAAcABAACAAEAADATAAcABAABAAEAAAASAAcABAABAAEAAAARAAcABAABAAEAAAAQAAgABAABAAEAAAAWAAYABAABAAEAAAAVAAYABAABAAEAAAAXAAYABAABAAEAAAAYAAYABAABAAEAAAAHAAUABAACAAIAAAAGAAQABAABAAIAAAAFAAIABAADAAIAAAAGAAMABAADAAIAAFAHAAQABAADAAIAAFAEAAIABAADAAIAAFA=")
+tile_set = ExtResource("1_ebmjs")
+
+[node name="BackgroundBushes" type="Sprite2D" parent="Background"]
+z_index = -2
+position = Vector2(-576.389, 149.222)
+scale = Vector2(0.756033, 0.762832)
+texture = ExtResource("2_wrm1d")
+
+[node name="BackgroundGrass" type="Sprite2D" parent="Background"]
+z_index = -2
+position = Vector2(-436.111, 450)
+texture = ExtResource("3_3dryh")
+
+[node name="Tilemap2" type="TileMapLayer" parent="Background"]
+z_index = 3
+texture_filter = 1
+position = Vector2(0, 31.9375)
+scale = Vector2(0.25, 0.25)
+tile_map_data = PackedByteArray("AAD2/wgABAADAAEAAFD1/wcABAADAAEAAFDu/wcABAADAAEAAAAKAAgABAADAAEAAFAQAAcABAADAAEAAAAPAAgABAADAAEAAAAUAAYABAADAAEAAAA=")
+tile_set = ExtResource("1_ebmjs")
+
+[node name="BackgroundGrass2" type="Sprite2D" parent="Background"]
+z_index = -1
+position = Vector2(1054.17, 444.444)
+texture = ExtResource("3_3dryh")
+
+[node name="BackgroundBushes2" type="Sprite2D" parent="Background"]
+z_index = -2
+position = Vector2(611.111, 179.778)
+scale = Vector2(0.756033, 0.762832)
+texture = ExtResource("2_wrm1d")
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+z_index = -5
+offset_left = -1027.78
+offset_top = -595.222
+offset_right = 1247.22
+offset_bottom = 578.778
+color = Color(0.698039, 0.917647, 0.992157, 1)
+
+[node name="Thorn_big" type="Sprite2D" parent="Background"]
+position = Vector2(546.069, 546.479)
+scale = Vector2(0.144728, 0.194444)
+texture = ExtResource("4_3dryh")
+
+[node name="Thorn_big2" type="Sprite2D" parent="Background"]
+position = Vector2(571.069, 546.479)
+scale = Vector2(0.144728, 0.194444)
+texture = ExtResource("4_3dryh")
+
+[node name="Thorn_big3" type="Sprite2D" parent="Background"]
+position = Vector2(594.917, 545.507)
+scale = Vector2(0.144728, 0.194444)
+texture = ExtResource("4_3dryh")
+
+[node name="Thorn_big4" type="Sprite2D" parent="Background"]
+position = Vector2(619.917, 545.507)
+scale = Vector2(0.144728, 0.194444)
+texture = ExtResource("4_3dryh")
+
+[node name="Thorn_big5" type="Sprite2D" parent="Background"]
+position = Vector2(644.681, 546.479)
+scale = Vector2(0.144728, 0.194444)
+texture = ExtResource("4_3dryh")
+
+[node name="Far_Ground" type="StaticBody2D" parent="Background"]
+position = Vector2(1073.61, 263.146)
+constant_linear_velocity = Vector2(0, 11.635)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Far_Ground"]
+position = Vector2(4825, 77.7778)
+shape = SubResource("RectangleShape2D_rku1e")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Background/Far_Ground"]
+position = Vector2(-6908.33, 177.778)
+shape = SubResource("RectangleShape2D_rku1e")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+z_index = 5
+offset_left = 981.0
+offset_top = 548.0
+offset_right = 1369.66
+offset_bottom = 720.0
+scale = Vector2(0.475, 0.475)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AngleLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Angle"
+label_settings = SubResource("LabelSettings_h4fw4")
+
+[node name="PowerLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Power
+"
+label_settings = SubResource("LabelSettings_h4fw4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o5yvi")
+
+[node name="Target" type="StaticBody2D" parent="."]
+position = Vector2(497, 154)
+scale = Vector2(0.72, 0.72)
+
+[node name="Target_Sprite" type="Sprite2D" parent="Target"]
+position = Vector2(-16.6666, 1.38889)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("12_rku1e")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Target"]
+position = Vector2(-20.8331, 11.1111)
+polygon = PackedVector2Array(27.7778, -25, 47.2222, -6.94445, 50, 2.77778, 41.6667, 22.2222, -22.2222, 23.6111, -31.9445, 4.16667, -31.9445, -6.94445, -4.16666, -44.4444, 25, -40.2778)
