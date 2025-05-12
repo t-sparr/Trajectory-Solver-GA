@@ -3,7 +3,7 @@ extends Node
 # === Config ===
 const SERVER_IP := "127.0.0.1"
 const SERVER_PORT := 8002
-const LAUNCH_BAT := "C:\\Users\\Marco\\Documents\\Godot Projects\\Trajectory Solver\\Python\\launch_tcp_server.bat"
+const LAUNCH_BAT := "C:\\Users\\Marco\\Documents\\Godot_Projects\\Trajectory_Solver\\Python\\launch_tcp_server.bat"
 
 # === State ===
 var client := StreamPeerTCP.new()

@@ -1,9 +1,28 @@
-def evaluate_agent(input_data):
-    angle = input_data.get("angle", 0)
-    power = input_data.get("power", 0)
-    fitness = input_data.get("fitness",0)
-    # Example logic — replace with genome evaluation
-    
-    return {
-        "fitness": fitness
-    }
+import random
+import socket
+import json
+from deap import base, creator, tools, algorithms
+
+
+#DEAP Setup
+
+creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMax)
+
+toolbox = base.Toolbox()
+
+toolbox.register("attr_angle", random.uniform, -90, 0)
+toolbox.register("attr_power", random.uniform,0,100)
+toolbox.register("individual", tools.initCycle, creator.Individual, 
+                 (toolbox.attr_angle, toolbox.attr_power), n=1)
+toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+
+
+
+
+# def main():
+#     pop = toolbox.population(n=10)
+#     print(pop)
+
+
+

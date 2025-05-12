@@ -40,6 +40,5 @@ func delete_projectile():
 		"power": shot_data.power,
 		"fitness": fitness
 	}
-	print("Fitness:", fitness)
 	tcp_client.send_json(message)
 	queue_free()
